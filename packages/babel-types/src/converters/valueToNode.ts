@@ -10,7 +10,6 @@ import {
   objectProperty,
   objectExpression,
   unaryExpression,
-  binaryExpression,
 } from "../builders/generated";
 import type * as t from "..";
 
@@ -76,22 +75,19 @@ function valueToNode(value: unknown): t.Expression {
     return stringLiteral(value);
   }
 
-  // numbers
+  //numbers
   if (typeof value === "number") {
     let result;
     if (Number.isFinite(value)) {
       result = numericLiteral(Math.abs(value));
     } else {
-      let numerator;
       if (Number.isNaN(value)) {
         // NaN
-        numerator = numericLiteral(0);
+        result = identifier("NaN");
       } else {
         // Infinity / -Infinity
-        numerator = numericLiteral(1);
+        result = identifier("Infinity");
       }
-
-      result = binaryExpression("/", numerator, numericLiteral(0));
     }
 
     if (value < 0 || Object.is(value, -0)) {

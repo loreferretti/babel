@@ -1,6 +1,4 @@
 {
-  "plugins": [
-    ["importAttributes", { "deprecatedAssertSyntax": true }]
-  ],
+  "plugins": [["importAttributes", { "deprecatedAssertSyntax": true }]],
   "sourceType": "module"
 }
